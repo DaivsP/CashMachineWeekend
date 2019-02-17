@@ -39,6 +39,6 @@ public final class AccountData {
         return "Account id: " + id + '\n' +
                 "Name: " + name + '\n' +
                 "Email: " + email + '\n' +
-                "Balance: " + balance;
+                "Balance: " + String.format("%.2f", balance);
     }
 }

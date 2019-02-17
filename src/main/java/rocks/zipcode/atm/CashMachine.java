@@ -31,7 +31,7 @@ public class CashMachine {
         myReturnMessage = accountData != null ? accountData.toString() : "Try account 1000, 2000, 3000, or 4000 and click Set Account ID. Modified by Davis";
     }
 
-    public void deposit(int amount) {
+    public void deposit(float amount) {
         if (accountData != null) {
             tryCall(
                     () -> bank.deposit(accountData, amount),
@@ -41,7 +41,7 @@ public class CashMachine {
         myReturnMessage = accountData != null ? "Your Deposit is successful" + "\n" + accountData.toString() : "Deposit Error";
     }
 
-    public void withdraw(int amount) {
+    public void withdraw(float amount) {
         if (accountData != null) {
             tryCall(
                     () -> bank.withdraw(accountData, amount),
