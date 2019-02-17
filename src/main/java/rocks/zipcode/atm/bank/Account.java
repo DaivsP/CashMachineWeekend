@@ -32,7 +32,7 @@ public abstract class Account {
         return getBalance() >= amount;
     }
 
-    public int getBalance() {
+    public float getBalance() {
         return accountData.getBalance();
     }
 

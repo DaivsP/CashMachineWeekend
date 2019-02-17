@@ -13,6 +13,7 @@ public class CashMachine {
 
     private final Bank bank;
     private AccountData accountData = null;
+    private String myReturnMessage = "Davis";
 
     public CashMachine(Bank bank) {
         this.bank = bank;
@@ -27,6 +28,7 @@ public class CashMachine {
                 () -> bank.getAccountById(id),
                 update
         );
+        myReturnMessage = accountData != null ? accountData.toString() : "Try account 1000, 2000, 3000, or 4000 and click Set Account ID. Modified by Davis";
     }
 
     public void deposit(int amount) {
@@ -36,6 +38,7 @@ public class CashMachine {
                     update
             );
         }
+        myReturnMessage = accountData != null ? "Your Deposit is successful" + "\n" + accountData.toString() : "Deposit Error";
     }
 
     public void withdraw(int amount) {
@@ -45,6 +48,15 @@ public class CashMachine {
                     update
             );
         }
+        String overDraftMessage = "";
+        if (accountData.getBalance() < 0){
+            overDraftMessage = "Your Withdraw was successful" + "\n" + "Your account is overdrawn" + "\n";
+        }
+        else{
+            overDraftMessage = "Your Withdraw was successful" + "\n";
+        }
+        myReturnMessage = accountData != null ? overDraftMessage +
+                accountData.toString() : "Withdraw Error";
     }
 
     public void exit() {
@@ -55,7 +67,7 @@ public class CashMachine {
 
     @Override
     public String toString() {
-        return accountData != null ? accountData.toString() : "Try account 1000 or 2000 and click submit.";
+        return myReturnMessage;
     }
 
     private <T> void tryCall(Supplier<ActionResult<T> > action, Consumer<T> postAction) {
