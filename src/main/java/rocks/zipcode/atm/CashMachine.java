@@ -23,6 +23,14 @@ public class CashMachine {
         accountData = data;
     };
 
+    public void accounts (){
+        tryCall(
+                ()->bank.createAccountList(),
+                update
+        );
+        myReturnMessage = bank.getAccountList().toString();
+    }
+
     public void login(int id) {
         tryCall(
                 () -> bank.getAccountById(id),
@@ -63,6 +71,8 @@ public class CashMachine {
         if (accountData != null) {
             accountData = null;
         }
+        myReturnMessage = "Successfully exited Account" + "\n" +
+                "Please log into another Account";
     }
 
     @Override

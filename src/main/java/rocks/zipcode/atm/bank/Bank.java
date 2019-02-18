@@ -2,13 +2,13 @@ package rocks.zipcode.atm.bank;
 
 import rocks.zipcode.atm.ActionResult;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author ZipCodeWilmington
  */
 public class Bank {
+    private List<Integer> accountList;
 
     private Map<Integer, Account> accounts = new HashMap<>();
 
@@ -28,6 +28,21 @@ public class Bank {
         accounts.put(4000, new BasicAccount(new AccountData(
                 4000, "Mike", "mike@gmail.com", -10
         )));
+    }
+
+    public ActionResult<AccountData> createAccountList(){
+        List<Integer> accountList = new ArrayList<Integer>();
+        Set<Integer> keySet = accounts.keySet();
+        for (Integer accountNumber : keySet) {
+            accountList.add(accountNumber);
+        }
+        this.accountList = accountList;
+
+        if(accounts != null)
+            return ActionResult.success(new AccountData(0,"","",0));
+        else
+            return ActionResult.fail("No accounts in Bank:");
+
     }
 
     public ActionResult<AccountData> getAccountById(int id) {
@@ -56,5 +71,9 @@ public class Bank {
         } else {
             return ActionResult.fail("Withdraw failed: " + amount + ". Account has: " + account.getBalance());
         }
+    }
+
+    public List<Integer> getAccountList() {
+        return accountList;
     }
 }

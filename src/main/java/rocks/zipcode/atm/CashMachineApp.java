@@ -49,6 +49,13 @@ public class CashMachineApp extends Application {
             areaInfo.setText(cashMachine.toString());
         });
 
+        Button btnAccountList = new Button("Account List");
+        btnAccountList.setOnAction(e -> {
+            cashMachine.accounts();
+
+            areaInfo.setText(cashMachine.toString());
+        });
+
         Button btnExit = new Button("Exit");
         btnExit.setOnAction(e -> {
             cashMachine.exit();
@@ -61,6 +68,7 @@ public class CashMachineApp extends Application {
         flowpane.getChildren().add(btnSubmit);
         flowpane.getChildren().add(btnDeposit);
         flowpane.getChildren().add(btnWithdraw);
+        flowpane.getChildren().add(btnAccountList);
         flowpane.getChildren().add(btnExit);
         vbox.getChildren().addAll(field, flowpane, areaInfo);
         return vbox;
